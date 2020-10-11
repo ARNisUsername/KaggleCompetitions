@@ -28,11 +28,11 @@ def best():
     theMax = 0
     theList = []
     CList = [0.01,0.1,1,10,100]
-    GList = CList
+    GList = [0.01,0.1,1,10,100]
     for c in CList:
         for g in GList:
-            lg = SVC(C=c, gamma=g).fit(X_train_scaled, y_train)
-            matrix = confusion_matrix(y_test, lg.predict(X_test_scaled))
+            model = SVC(C=c, gamma=g).fit(X_train_scaled, y_train)
+            matrix = confusion_matrix(y_test, model.predict(X_test_scaled))
             if int(matrix[0][0]) + int(matrix[1][1]) > theMax:
                 theMax = int(matrix[0][0]) + int(matrix[1][1])
                 theList = [c,g]
@@ -41,8 +41,7 @@ def best():
 def scaleNum(theNum):
     return (theNum - min_on_training) / range_on_training
 
-#lg = GradientBoostingClassifier(random_state=0, max_depth=4, learning_rate=0.1).fit(X, y)
-lg = SVC(kernel='poly', C=best()[0], gamma=best()[1]).fit(scaleNum(X), y)
+model = SVC(kernel='poly', C=best()[0], gamma=best()[1]).fit(scaleNum(X), y)
 
 totalIds = []
 Y_Pred = []
@@ -50,7 +49,7 @@ Y_Pred = []
 for theId in range(892, 1310):
     theX = theTest[theTest['PassengerId']==theId][['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']]
     totalIds.append(theId)
-    Y_Pred.append(lg.predict(scaleNum(theX)))
+    Y_Pred.append(model.predict(scaleNum(theX)))
 
 totalIds = np.array(totalIds)
 Y_Pred = np.array(Y_Pred)
@@ -61,4 +60,4 @@ submission = pd.DataFrame({
     "Survived": Y_Pred
 })
 
-submission.to_csv('theSubmission1.csv', index=False)
+submission.to_csv('theSubmission.csv', index=False)
