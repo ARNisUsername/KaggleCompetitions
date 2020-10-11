@@ -1,12 +1,7 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
 
@@ -25,7 +20,6 @@ X = theTrain[['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']]
 y = theTrain['Survived']
 
 X = X.fillna(X.mean())
-
 theTest = theTest.fillna(theTest.mean())
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
