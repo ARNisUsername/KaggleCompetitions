@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
@@ -22,10 +21,8 @@ y = theTrain['Survived']
 X = X.fillna(X.mean())
 theTest = theTest.fillna(theTest.mean())
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
-
-min_on_training = X_train.min(axis=0)
-range_on_training = (X_train - min_on_training).max(axis=0)
+min_on_training = X.min(axis=0)
+range_on_training = (X - min_on_training).max(axis=0)
 
 def best():
     theMax = 0
