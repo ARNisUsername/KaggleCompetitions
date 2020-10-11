@@ -21,7 +21,6 @@ d = {'S': 0, 'C': 1, 'Q': 2}
 theTrain['Embarked'] = theTrain['Embarked'].map(d)
 theTest['Embarked'] = theTest['Embarked'].map(d)
 
-
 X = theTrain[['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']]
 y = theTrain['Survived']
 
