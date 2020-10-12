@@ -23,6 +23,8 @@ theTest = theTest.fillna(theTest.mean())
 
 min_on_training = X.min(axis=0)
 range_on_training = (X - min_on_training).max(axis=0)
+X_train_scaled = (X_train - min_on_training) / range_on_training
+X_test_scaled = (X_test - min_on_training) / range_on_training
 
 def best():
     theMax = 0
