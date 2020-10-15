@@ -1,1 +1,1 @@
-# TitanicCompetition
+# KaggleCompetitions
