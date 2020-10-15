@@ -9,8 +9,6 @@ theTest = pd.read_csv('theTest.csv')
 X = theTrain.drop('target', axis=1)
 y = theTrain['target']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
-
 #Filtering and tokenizing of stopwords(useless words)
 count_vect = CountVectorizer(binary=True)
 X_train_counts = count_vect.fit_transform(X['text'])
