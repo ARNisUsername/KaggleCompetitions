@@ -1,11 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import MultinomialNB, GaussianNB, ComplementNB
-from sklearn.metrics import confusion_matrix, classification_report
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import MultinomialNB
 
 theTrain = pd.read_csv('theTrain.csv')
 theTest = pd.read_csv('theTest.csv')
@@ -16,17 +12,15 @@ y = theTrain['target']
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
 #Filtering and tokenizing of stopwords(useless words)
-count_vect = CountVectorizer()
-X_train_counts = count_vect.fit_transform(X_train['text'])
+count_vect = CountVectorizer(binary=True)
+X_train_counts = count_vect.fit_transform(X['text'])
 
 #Make long and short documents share same info and weigh down common words
 tf_transformer = TfidfTransformer(use_idf=False).fit(X_train_counts)
 X_train_tf = tf_transformer.transform(X_train_counts)
 
-
 #Train the model using MultinomialNB and the updated X_train
-clf = RandomForestClassifier(n_estimators=500).fit(X_train_tf, y_train)
-
+clf = MultinomialNB().fit(X_train_tf, y)
 
 theIds = []
 theResults = []
