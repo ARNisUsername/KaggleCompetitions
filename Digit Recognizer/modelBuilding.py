@@ -13,7 +13,6 @@ test = pd.read_csv('test.csv')
 train[train.columns[1:]] = MinMaxScaler().fit_transform(train[train.columns[1:]])
 test[test.columns] = MinMaxScaler().fit_transform(test[test.columns])
 
-
 train.to_csv('scaled_train.csv',index=False)
 test.to_csv('scaled_test.csv',index=False)
 
