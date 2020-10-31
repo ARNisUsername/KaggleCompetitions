@@ -33,6 +33,7 @@ X = np.array(newX)
 
 #Make the model
 model = keras.Sequential()
+#Add a Convential 2d neural network(neural network common for image classification) with 32 filters to extract from the image data
 model.add(keras.layers.Conv2D(32, kernel_size=5,activation='relu',input_shape=(28,28,1),padding='same',data_format='channels_last'))
 model.add(keras.layers.MaxPooling2D(2,2))
 model.add(keras.layers.Dropout(0.2))
