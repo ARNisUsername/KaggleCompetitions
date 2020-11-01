@@ -68,7 +68,6 @@ model.compile(loss='sparse_categorical_crossentropy',optimizer='adam',
 model.fit(datagen.flow(X, y, batch_size=100), epochs=5)
 
 theIds = [i for i in range(1,28001)]
-test = np.array(test)
 thePred = np.array(test).reshape(test.shape[0],28,28,1)
 thePred = model.predict(thePred)
 preds = np.argmax(thePred, axis=1)
