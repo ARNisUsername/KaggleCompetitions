@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import random
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
 from tensorflow import keras
@@ -27,8 +26,6 @@ newX = []
 for i in X:
     newX.append(i.reshape(28,28,1))
 X = np.array(newX)
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
 model = keras.Sequential()
 model.add(keras.layers.Conv2D(32, kernel_size=5,activation='relu',input_shape=(28,28,1),padding='same',data_format='channels_last'))
