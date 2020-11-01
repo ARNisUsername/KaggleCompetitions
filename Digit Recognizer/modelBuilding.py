@@ -67,22 +67,6 @@ model.compile(loss='sparse_categorical_crossentropy',optimizer='adam',
 
 model.fit(datagen.flow(X, y, batch_size=100), epochs=5)
 
-def score(X_test, y_test, amount):
-    score = 0
-    total = amount
-    theMin = random.randint(0, len(y_test)-amount-1)
-    theMax = theMin + 300
-    counter = 0
-    for i in range(theMin, theMax):
-        predictionArr = list(model.predict(X_test[i:i+1])[0])
-        actualInt = predictionArr.index(max(predictionArr))
-        if actualInt == y_test[i]:
-            score += 1
-        counter += 1
-        print(f"{counter}/{total} complete")
-    testAcc = score/total
-    print(f"TEST ACC: {testAcc}")
-
 theIds = [i for i in range(1,28001)]
 test = np.array(test)
 thePred = np.array(test).reshape(test.shape[0],28,28,1)
