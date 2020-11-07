@@ -47,6 +47,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 param_grid = {'learning_rate':[0.01,0.1,1,10,100],'max_depth':[2,3,4,5,6]}
 grid = GridSearchCV(GradientBoostingClassifier(),param_grid,verbose=1)
 model = grid.fit(X_train, y_train)
+#Use this, then change the Boosting Classifier to the appropiate results
+print(model.best_params_) 
+model = GradientBoostingClassifier(learning_rate=0.1,max_depth=2).fit(X, y)
 
 theIds = np.array([i for i in range(892,1310)])
 allPredictions = []
